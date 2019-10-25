@@ -7,6 +7,17 @@
     <groupId>com.runisys</groupId>
     <artifactId>hos-common</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <parent>
+        <artifactId>hos-service</artifactId>
+        <groupId>com.runisys</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>com.runisys</groupId>
+            <artifactId>hos-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
-    
 </project>

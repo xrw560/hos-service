@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.runisys.authmgr.dao.TokenInfoMapper">
+    <resultMap id="TokenInfoResultMap" type="com.runisys.authmgr.module.TokenInfo">
+        <id column="TOKEN" property="token"/>
+        <result column="EXPIRE_TIME" property="expireTime"/>
+        <result column="REFRESH_TIME" property="refreshTime"/>
+        <result column="ACTIVE" property="active"/>
+        <result column="CREATOR" property="creator"/>
+        <result column="CREATE_TIME" property="createTime"/>
+    </resultMap>
+
+    <insert id="addToken">
+        INSERT  INTO TOKEN_INFO
+        (TOKEN, EXPIRE_TIME, REFRESH_TIME, ACTIVE,CREATOR,CREATE_TIME)
+        VALUES
+        (#{tokenInfo.token},#{tokenInfo.expireTime},#{tokenInfo.refreshTime},
+        #{tokenInfo.active},#{tokenInfo.creator},#{tokenInfo.createTime})
+    </insert>
+    <update id="updateToken">
+        UPDATE TOKEN_INFO SET EXPIRE_TIME=#{expireTime},ACTIVE=#{isActive}
+        WHERE TOKEN=#{token}
+    </update>
+
+    <update id="refreshToken">
+        UPDATE TOKEN_INFO SET REFRESH_TIME=#{refreshTime}
+        WHERE TOKEN=#{token}
+    </update>
+
+    <delete id="deleteToken">
+        DELETE FROM TOKEN_INFO WHERE TOKEN=#{token}
+    </delete>
+    <select id="getTokenInfo" resultMap="TokenInfoResultMap">
+        SELECT * FROM TOKEN_INFO WHERE
+        TOKEN = #{token}
+    </select>
+    <select id="getTokenInfos" resultMap="TokenInfoResultMap">
+        SELECT * FROM TOKEN_INFO WHERE
+        CREATOR = #{creator}
+    </select>
+</mapper>

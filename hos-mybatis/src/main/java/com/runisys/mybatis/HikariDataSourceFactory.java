@@ -3,9 +3,9 @@ package com.runisys.mybatis;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory;
 
-public class HikariDataSSourceFactory extends UnpooledDataSourceFactory {
+public class HikariDataSourceFactory extends UnpooledDataSourceFactory {
 
-    public HikariDataSSourceFactory() {
+    public HikariDataSourceFactory() {
         this.dataSource = new HikariDataSource();
     }
 

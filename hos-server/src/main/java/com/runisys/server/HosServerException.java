@@ -1,18 +1,18 @@
-package com.runisys.authmgr;
+package com.runisys.server;
 
 import com.runisys.HosException;
 
-public class HosAuthmgrException extends HosException {
+public class HosServerException extends HosException {
     private int code;
     private String message;
 
-    public HosAuthmgrException(int code, String message, Throwable cause) {
+    public HosServerException(int code, String message, Throwable cause) {
         super(message, cause);
         this.code = code;
         this.message = message;
     }
 
-    public HosAuthmgrException(int code, String message) {
+    public HosServerException(int code, String message) {
         super(message, null);
         this.code = code;
         this.message = message;
