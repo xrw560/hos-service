@@ -25,6 +25,12 @@ public interface IAuthService {
 
     public boolean refreshToken(String token);
 
+    /**
+     * token是否有效
+     *
+     * @param token
+     * @return
+     */
     public boolean checkToken(String token);
 
     public TokenInfo getTokenInfo(String token);
