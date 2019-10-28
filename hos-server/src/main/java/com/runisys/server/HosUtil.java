@@ -1,5 +1,7 @@
 package com.runisys.server;
 
+import org.apache.hadoop.hbase.util.Bytes;
+
 public class HosUtil {
 
     static final String DIR_TABLE_PREFIX = "hos_dir_";
@@ -29,6 +31,13 @@ public class HosUtil {
     static final String BUCKET_DIR_SEQ_CF = "s";
     static final byte[] BUCKET_DIR_SEQ_CF_BYTES = BUCKET_DIR_SEQ_CF.getBytes();
     static final byte[] BUCKET_DIR_SEQ_QUALIFIER = "s".getBytes();
+
+    static final byte[][] OBJ_REGIONS = new byte[][]{
+            Bytes.toBytes("1"),
+            Bytes.toBytes("4"),
+            Bytes.toBytes("7")
+    };
+
 
     static String getDirTableName(String bucketName) {
         return DIR_TABLE_PREFIX + bucketName;

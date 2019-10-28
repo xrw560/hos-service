@@ -6,6 +6,7 @@ import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.filter.FilterList;
+import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -138,12 +139,22 @@ public class HBaseServiceImpl {
     }
 
     //10 incrementColumnValue 通过这个方法，生成目录的seqid
-    public static long incrementColumnValue(Connection connection, String tableName, String row, String cf, String qualifier, int num) {
+    public static long incrementColumnValue(Connection connection, String tableName, String row, byte[] cf, byte[] qualifier, int num) {
         try (Table table = connection.getTable(TableName.valueOf(tableName))) {
-            return table.incrementColumnValue(row.getBytes(), cf.getBytes(), qualifier.getBytes(), num);
+            return table.incrementColumnValue(row.getBytes(), cf, qualifier, num);
         } catch (IOException e) {
             e.printStackTrace();
             throw new HosServerException(ErrorCodes.ERROR_HBASE, "get row error");
+        }
+    }
+
+    public static boolean existsRow(Connection connection, String tableName, String row) {
+        try (Table table = connection.getTable(TableName.valueOf(tableName))) {
+            Get g = new Get(Bytes.toBytes(row));
+            return table.exists(g);
+        } catch (Exception e) {
+            String msg = String.format("check exists row from table=%s error. msg=%s", tableName, e.getMessage());
+            throw new HosServerException(ErrorCodes.ERROR_HBASE, msg);
         }
     }
 
